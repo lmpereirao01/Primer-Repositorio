@@ -8,10 +8,22 @@ Eliminar los signos de puntuación y convertir todas las palabras a minúsculas 
 Usar un diccionario donde la clave sea la palabra y el valor sea su frecuencia.
 Mostrar las palabras y sus frecuencias de forma ordenada por la palabra.
 """
+import string
 
 text = input("Introduce una frase o párrafo:")
 
-normalized_text = text.lower().replace(".","") # Delete all dots
-words = normalized_text.split() 
+text = text.lower()
+for punct in string.punctuation:
+    text = text.replace(punct, "")
 
-print(words)
+words = text.split()
+dictionary = {}
+
+for n in words:
+    if n in dictionary:
+        dictionary[n]+=1
+    else:
+        dictionary[n]=1
+    
+for word in sorted(dictionary):
+    print(f"{word}: {dictionary[word]}")
